@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORSCHE | Experience the Soul</title>
+    
+    <!-- Fonts & Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- 3D and Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: white;
+            overflow-x: hidden;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #fff, #666);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+        .booking-input {
+            background: transparent;
+            border-bottom: 1px solid #333;
+            transition: border-color 0.3s ease;
+        }
+        .booking-input:focus {
+            border-color: #dc2626;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 3D BACKGROUND -->
+    <div id="canvas-container"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 flex justify-between items-center p-6 md:px-12 py-8">
+        <div class="text-2xl font-black tracking-tighter uppercase">
+            PORSCHE <span class="text-red-600">911</span>
+        </div>
+        <div class="hidden md:flex gap-10 text-[10px] uppercase tracking-[0.2em] font-bold opacity-60">
+            <a href="#specs" class="hover:text-red-600 transition">Specifications</a>
+            <a href="#details" class="hover:text-red-600 transition">Innovation</a>
+            <a href="#book" class="hover:text-red-600 transition">Booking</a>
+        </div>
+        <button class="px-6 py-2 border border-white/20 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition">
+            Menu
+        </button>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-screen flex items-center px-6 md:px-20">
+        <div class="max-w-4xl">
+            <h1 id="hero-title" class="text-7xl md:text-9xl font-black uppercase leading-none tracking-tighter italic opacity-0 translate-y-10">
+                Pure <br> <span class="text-red-600">Adrenaline.</span>
+            </h1>
+            <p id="hero-text" class="mt-6 text-lg md:text-xl text-gray-400 max-w-md font-light opacity-0">
+                The new 911 combines timeless design with future-proof engineering. 
+                Precision in every curve, power in every heartbeat.
+            </p>
+            <button id="hero-btn" class="mt-10 px-10 py-4 bg-red-600 text-white font-bold uppercase text-xs tracking-widest opacity-0 shadow-[0_0_30px_rgba(220,38,38,0.4)] transition-transform hover:scale-105">
+                Configure Your Ride
+            </button>
+        </div>
+    </section>
+
+    <!-- SPECS SECTION -->
+    <section id="specs" class="relative z-10 py-32 px-6 md:px-20 bg-[#0a0a0a]">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass p-10 rounded-3xl group hover:border-red-600 transition-all duration-500">
+                <i data-lucide="gauge" class="text-red-600 mb-6 w-8 h-8"></i>
+                <h4 class="text-gray-500 text-xs uppercase tracking-widest mb-2">0-100 km/h</h4>
+                <div class="text-4xl font-bold mb-4">2.7 Sec</div>
+                <p class="text-gray-500 text-sm">Twin-turbocharged flat-six engine delivering raw, unfiltered power.</p>
+            </div>
+            <div class="glass p-10 rounded-3xl group hover:border-red-600 transition-all duration-500">
+                <i data-lucide="zap" class="text-red-600 mb-6 w-8 h-8"></i>
+                <h4 class="text-gray-500 text-xs uppercase tracking-widest mb-2">Top Speed</h4>
+                <div class="text-4xl font-bold mb-4">330 km/h</div>
+                <p class="text-gray-500 text-sm">Aerodynamic perfection designed to maintain stability at extreme speeds.</p>
+            </div>
+            <div class="glass p-10 rounded-3xl group hover:border-red-600 transition-all duration-500">
+                <i data-lucide="shield-check" class="text-red-600 mb-6 w-8 h-8"></i>
+                <h4 class="text-gray-500 text-xs uppercase tracking-widest mb-2">Handling</h4>
+                <div class="text-4xl font-bold mb-4">Rear Axle</div>
+                <p class="text-gray-500 text-sm">Surgical precision in every corner with active rear-axle steering.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING SECTION -->
+    <section id="book" class="relative z-10 py-32 px-6 md:px-20 bg-black">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <div>
+                <h3 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter leading-none">
+                    Claim Your <br> <span class="text-red-600">Throne.</span>
+                </h3>
+                <p class="mt-8 text-gray-500 text-lg leading-relaxed">
+                    Step inside the cockpit and feel the legacy. Book a private consultation 
+                    and test drive session with our master consultants.
+                </p>
+            </div>
+
+            <div class="glass p-10 rounded-3xl shadow-2xl">
+                <form class="space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[10px] uppercase tracking-widest text-gray-500">Full Name</label>
+                            <input type="text" class="booking-input p-2 text-white" placeholder="John Doe">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[10px] uppercase tracking-widest text-gray-500">Email</label>
+                            <input type="email" class="booking-input p-2 text-white" placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] uppercase tracking-widest text-gray-500">Select Model</label>
+                        <select class="booking-input p-2 text-white bg-black">
+                            <option>911 Carrera</option>
+                            <option>911 GT3 RS</option>
+                            <option>Taycan Turbo S</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] uppercase tracking-widest text-gray-500">Date</label>
+                        <input type="date" class="booking-input p-2 text-white">
+                    </div>
+                    <button class="w-full py-4 bg-white text-black font-bold uppercase text-xs tracking-widest hover:bg-red-600 hover:text-white transition-all duration-300">
+                        Confirm Booking
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-10 text-center text-gray-600 text-[10px] uppercase tracking-widest">
+        &copy; 2026 Porsche Experience Concept | Designed for Performance
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // --- THREE.JS 3D CORE ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Placeholder Car (Luxury Box) - Replace with GLTFLoader for actual car model
+        const geometry = new THREE.BoxGeometry(2, 0.6, 4);
+        const material = new THREE.MeshStandardMaterial({ 
+            color: 0x111111, 
+            metalness: 1, 
+            roughness: 0.1 
+        });
+        const car = new THREE.Mesh(geometry, material);
+        scene.add(car);
+
+        // Studio Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const spotLight = new THREE.SpotLight(0xffffff, 1);
+        spotLight.position.set(5, 10, 5);
+        spotLight.castShadow = true;
+        scene.add(spotLight);
+
+        const redLight = new THREE.PointLight(0xef4444, 2);
+        redLight.position.set(-5, 2, -5);
+        scene.add(redLight);
+
+        camera.position.z = 6;
+        camera.position.y = 2;
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            car.rotation.y += 0.003; // Subtle rotation
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- GSAP ANIMATIONS ---
+        gsap.to("#hero-title", { opacity: 1, y: 0, duration: 1, delay: 0.5 });
+        gsap.to("#hero-text", { opacity: 1, duration: 1, delay: 0.8 });
+        gsap.to("#hero-btn", { opacity: 1, duration: 1, delay: 1.1 });
+
+        // Camera Movement on Scroll
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.to(camera.position, {
+            z: 3,
+            y: 1,
+            scrollTrigger: {
+                trigger: "#specs",
+                start: "top bottom",
+                end: "top top",
+                scrub: 1
+            }
+        });
+    </script>
+</body>
+</html>
